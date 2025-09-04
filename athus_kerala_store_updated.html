@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Athu’s Kerala Store — Authentic Kerala Products</title>
+  <meta name="description" content="Athu’s Kerala Store brings authentic Kerala spices, snacks, handicrafts, and traditional essentials to your home." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌴</text></svg>">
+  <style>
+    :root{
+      --green:#1b5e20; /* Deep Kerala green */
+      --leaf:#2e7d32;  /* Leaf green */
+      --gold:#c8a951;  /* Temple gold */
+      --sand:#f6f3ea;  /* Banana-leaf plate vibe */
+      --text:#1a1a1a;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--text); background:var(--sand)}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* Header */
+    .topbar{position:sticky; top:0; z-index:50; background:#fff; box-shadow:var(--shadow)}
+    .wrap{max-width:1180px; margin:0 auto; padding:0 16px}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:70px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{width:42px; height:42px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg,var(--leaf),var(--green)); color:#fff; box-shadow:inset 0 0 0 2px rgba(255,255,255,.15)}
+    .brand h1{font-size:20px; margin:0; font-weight:700}
+    .tag{font-size:12px; color:var(--muted); margin-top:-6px}
+
+    .links{display:flex; gap:18px; align-items:center}
+    .links a{font-weight:600; padding:10px 12px; border-radius:10px}
+    .links a:hover{background:#f1f5f9}
+
+    .cta{display:flex; gap:10px}
+    .btn{border:none; cursor:pointer; padding:10px 14px; border-radius:12px; font-weight:700; box-shadow:var(--shadow); transition:.2s transform ease}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),#e7d499); color:#1f2937}
+    .btn-green{background:linear-gradient(135deg,var(--leaf),var(--green)); color:#fff}
+    .cart-btn{position:relative}
+    .badge{position:absolute; top:-6px; right:-6px; background:#ef4444; color:#fff; font-size:11px; padding:2px 6px; border-radius:999px}
+
+    /* Hero */
+    .hero{background:
+      linear-gradient(0deg, rgba(27,94,32,.65), rgba(27,94,32,.65)),
+      url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover; background-position:center; color:#fff}
+    .hero .wrap{padding:80px 16px}
+    .hero-grid{display:grid; grid-template-columns:repeat(12,1fr); gap:24px; align-items:center}
+    .hero-left{grid-column:span 7}
+    .hero-right{grid-column:span 5}
+    .pill{display:inline-flex; gap:8px; align-items:center; background:rgba(255,255,255,.15); backdrop-filter:blur(8px); padding:8px 12px; border-radius:999px; font-weight:600; margin-bottom:14px}
+    .headline{font-size:42px; line-height:1.1; margin:6px 0 12px; font-weight:800}
+    .sub{font-size:16px; color:#eef2ff; max-width:52ch}
+
+    /* Sections */
+    section{padding:56px 0}
+    h2.section-title{font-size:30px; margin:0 0 12px}
+    .section-sub{color:var(--muted); margin-bottom:26px}
+
+    /* Products */
+    .filters{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px}
+    .chip{border:1px solid #e5e7eb; padding:8px 12px; border-radius:999px; cursor:pointer; background:#fff; font-weight:600}
+    .chip.active, .chip:hover{border-color:var(--leaf); color:var(--leaf)}
+
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .card{grid-column:span 3; background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column}
+    .card .pic{aspect-ratio:4/3; object-fit:cover}
+    .card-body{padding:14px}
+    .title{font-weight:700; margin:2px 0}
+    .price{font-weight:800}
+    .strike{color:var(--muted); text-decoration:line-through; font-weight:600; margin-left:8px}
+    .card-foot{display:flex; justify-content:space-between; align-items:center; padding:12px 14px 16px}
+
+    /* Offers */
+    .offer{grid-column:span 4; background:linear-gradient(135deg,#fff, #fff7e6); border:1px dashed var(--gold); padding:16px; border-radius:var(--radius); box-shadow:var(--shadow)}
+
+    /* About */
+    .about{display:grid; grid-template-columns:repeat(12,1fr); gap:24px; align-items:center}
+    .about img{grid-column:span 6; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .about .copy{grid-column:span 6}
+
+    /* Contact */
+    .contact{display:grid; grid-template-columns:repeat(12,1fr); gap:24px}
+    .contact form{grid-column:span 7; background:#fff; padding:18px; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .contact aside{grid-column:span 5}
+    .field{display:grid; gap:6px; margin-bottom:12px}
+    input, textarea{padding:12px 14px; border:1px solid #e5e7eb; border-radius:12px; font:inherit}
+
+    /* Footer */
+    footer{background:#0b2a10; color:#cfe7d1}
+    footer .cols{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    footer .col{grid-column:span 3}
+    .subtle{color:#a3b3a5}
+
+    /* Cart Drawer */
+    .drawer{position:fixed; inset:0; display:none;}
+    .drawer.open{display:block}
+    .drawer .backdrop{position:absolute; inset:0; background:rgba(0,0,0,.45)}
+    .panel{position:absolute; right:0; top:0; height:100%; width:380px; max-width:100%; background:#fff; box-shadow:var(--shadow); display:flex; flex-direction:column}
+    .panel header{padding:16px; border-bottom:1px solid #e5e7eb; display:flex; align-items:center; justify-content:space-between}
+    .panel main{padding:16px; overflow:auto; flex:1}
+    .cart-item{display:grid; grid-template-columns:64px 1fr auto; gap:12px; align-items:center; padding:10px 0; border-bottom:1px dashed #eee}
+    .qty{display:inline-flex; align-items:center; gap:8px}
+    .totals{padding:12px 16px; border-top:1px solid #e5e7eb}
+
+    /* Responsiveness */
+    @media (max-width: 1024px){
+      .card{grid-column:span 4}
+      .offer{grid-column:span 6}
+      .about img, .about .copy{grid-column:span 12}
+      .contact form, .contact aside{grid-column:span 12}
+      footer .col{grid-column:span 6}
+    }
+    @media (max-width: 640px){
+      .links{display:none}
+      .headline{font-size:32px}
+      .hero-grid{grid-template-columns:1fr}
+      .hero-left, .hero-right{grid-column:span 12}
+      .card{grid-column:span 6}
+      .offer{grid-column:span 12}
+      footer .col{grid-column:span 12}
+    }
+  </style>
+  
+  <!-- LocalBusiness Schema for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Athu’s Kerala Store",
+    "description": "Authentic Kerala spices, snacks, handicrafts, and traditional essentials.",
+    "address": {"@type":"PostalAddress","addressLocality":"Kerala","addressCountry":"IN"},
+    "image": "https://images.unsplash.com/photo-1627308595181-5a52f8d9a91d?q=80&w=1200&auto=format&fit=crop",
+    "sameAs": ["https://instagram.com/"],
+    "telephone": "+91-00000-00000"
+  }
+  </script>
+</head>
+<body>
+  <!-- Header/Nav -->
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-label="Logo">🌴</div>
+        <div>
+          <h1>Athu’s Kerala Store</h1>
+          <div class="tag">Bringing Kerala’s Tradition to Your Home</div>
+        </div>
+      </div>
+      <nav class="links" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#products">Shop</a>
+        <a href="#offers">Offers</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="cta">
+        <button class="btn btn-primary" onclick="scrollToId('products')">Shop Now</button>
+        <button id="cartBtn" class="btn btn-green cart-btn" aria-label="Open cart">🧺 <span class="badge" id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="pill">100% Authentic • Kerala Sourced</div>
+          <h2 class="headline">Fresh Spices, Crunchy Snacks & Handcrafted Love</h2>
+          <p class="sub">From Alleppey’s golden turmeric to Wayanad’s robust pepper, we pack Kerala’s soul into every order. Fast shipping across India.</p>
+          <div style="display:flex; gap:10px; margin-top:16px">
+            <button class="btn btn-primary" onclick="scrollToId('products')">Browse Products</button>
+            <a class="btn btn-green" href="https://wa.me/910000000000?text=Hi%20Athu’s%20Kerala%20Store!%20I’d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">WhatsApp Order</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <img src="https://images.unsplash.com/photo-1627308595194-87e5d8e9d6c7?q=80&w=1200&auto=format&fit=crop" alt="Kerala spices assortment" style="border-radius:18px; box-shadow:var(--shadow)">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products">
+    <div class="wrap">
+      <h2 class="section-title">Popular Products</h2>
+      <div class="section-sub">Handpicked from trusted farms and artisans across Kerala.</div>
+
+      <div class="filters" role="tablist" aria-label="Product categories">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="Spices">Spices</button>
+        <button class="chip" data-filter="Snacks">Snacks</button>
+        <button class="chip" data-filter="Handicrafts">Handicrafts</button>
+        <button class="chip" data-filter="Essentials">Essentials</button>
+      </div>
+
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- Offers -->
+  <section id="offers" style="background:#ffffffaa">
+    <div class="wrap">
+      <h2 class="section-title">Special Offers</h2>
+      <div class="section-sub">Save more with seasonal picks & combo packs.</div>
+      <div class="grid">
+        <div class="offer">
+          <h3>Monsoon Spice Combo</h3>
+          <p>Black Pepper 250g + Turmeric 250g + Cinnamon 100g</p>
+          <p><strong>₹699</strong> <span class="strike">₹899</span></p>
+          <button class="btn btn-green" onclick="addComboToCart()">Add Combo</button>
+        </div>
+        <div class="offer">
+          <h3>Banana Chips Bonanza</h3>
+          <p>3 × 200g crispy chips (Salted, Jaggery, Peri-Peri)</p>
+          <p><strong>₹349</strong> <span class="strike">₹420</span></p>
+          <button class="btn btn-green" onclick="addChipsCombo()">Add Combo</button>
+        </div>
+        <div class="offer">
+          <h3>Onam Gift Hamper</h3>
+          <p>Assorted snacks + handicraft keepsake + greeting card</p>
+          <p><strong>₹1,299</strong> <span class="strike">₹1,599</span></p>
+          <button class="btn btn-green" onclick="addOnamHamper()">Add Hamper</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about">
+        <img src="https://images.unsplash.com/photo-1627308595181-5a52f8d9a91d?q=80&w=1200&auto=format&fit=crop" alt="Kerala backwaters and spices">
+        <div class="copy">
+          <h2 class="section-title">Our Story</h2>
+          <p>We started Athu’s Kerala Store to make it effortless for families across India to enjoy the taste of Kerala at home. We partner directly with farmers and artisans to ensure freshness, fair pricing and genuine quality.</p>
+          <ul>
+            <li>Freshly packed, batch-tested products</li>
+            <li>Secure payments & tracked shipping</li>
+            <li>Friendly support on WhatsApp & phone</li>
+          </ul>
+          <div style="display:flex; gap:10px; margin-top:8px">
+            <a class="btn btn-primary" href="#contact">Contact Us</a>
+            <a class="btn btn-green" href="#products">Explore Shop</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="section-sub">Questions or bulk orders? We’re here for you.</div>
+      <div class="contact">
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" required placeholder="Your name" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="How can we help?"></textarea>
+          </div>
+          <button class="btn btn-green" type="submit">Send Message</button>
+        </form>
+        <aside>
+          <div class="card" style="padding:16px">
+            <h3 style="margin:8px 0 6px">Store Details</h3>
+            <p class="subtle">Kerala, India</p>
+            <p><strong>Phone:</strong> +91 00000 00000</p>
+            <p><strong>Email:</strong> hello@athuskeralastore.in</p>
+            <div style="display:flex; gap:10px; margin-top:8px">
+              <a class="btn btn-primary" href="tel:+910000000000">Call Now</a>
+              <a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/910000000000?text=Hi%20Athu’s%20Kerala%20Store!">WhatsApp</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap" style="padding:30px 16px">
+      <div class="cols">
+        <div class="col">
+          <div class="brand">
+            <div class="logo">🌴</div>
+            <div>
+              <h3 style="margin:0">Athu’s Kerala Store</h3>
+              <div class="subtle">Authentic • Fresh • Trusted</div>
+            </div>
+          </div>
+          <p class="subtle" style="margin-top:10px">© <span id="year"></span> Athu’s Kerala Store. All rights reserved.</p>
+        </div>
+        <div class="col">
+          <h4>Quick Links</h4>
+          <p><a class="subtle" href="#home">Home</a></p>
+          <p><a class="subtle" href="#products">Shop</a></p>
+          <p><a class="subtle" href="#offers">Offers</a></p>
+          <p><a class="subtle" href="#contact">Contact</a></p>
+        </div>
+        <div class="col">
+          <h4>Customer Care</h4>
+          <p class="subtle">Shipping & Returns</p>
+          <p class="subtle">Privacy Policy</p>
+          <p class="subtle">Terms & Conditions</p>
+        </div>
+        <div class="col">
+          <h4>Follow Us</h4>
+          <p class="subtle">Instagram • Facebook • WhatsApp</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div id="cartDrawer" class="drawer" aria-hidden="true" role="dialog" aria-label="Shopping cart">
+    <div class="backdrop" onclick="toggleCart(false)"></div>
+    <div class="panel">
+      <header>
+        <strong>🧺 Your Cart</strong>
+        <button class="btn" onclick="toggleCart(false)">Close</button>
+      </header>
+      <main id="cartItems"></main>
+      <div class="totals">
+        <div style="display:flex; justify-content:space-between; padding:8px 0">
+          <span>Subtotal</span>
+          <strong id="subtotal">₹0</strong>
+        </div>
+        <div style="display:flex; gap:10px">
+          <button class="btn btn-primary" style="flex:1" onclick="checkoutWhatsApp()">Order on WhatsApp</button>
+          <button class="btn btn-green" style="flex:1" onclick="checkoutCOD()">Cash on Delivery</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const INR = n => `₹${n.toLocaleString('en-IN')}`;
+
+    const PRODUCTS = [
+      {id:'pepper',  title:'Black Pepper (Wayanad) 250g', price:349, category:'Spices',  img:'https://images.unsplash.com/photo-1617196039897-1b35c9a27e25?q=80&w=1200&auto=format&fit=crop'},
+      {id:'turmeric',title:'Alleppey Turmeric 250g',     price:199, category:'Spices',  img:'https://images.unsplash.com/photo-1627308595208-29e4a1c7db5a?q=80&w=1200&auto=format&fit=crop'},
+      {id:'cinnamon',title:'True Cinnamon 100g',         price:229, category:'Spices',  img:'https://images.unsplash.com/photo-1601045944519-72b5f7dc702d?q=80&w=1200&auto=format&fit=crop'},
+      {id:'elaichi', title:'Green Cardamom 100g',        price:399, category:'Spices',  img:'https://images.unsplash.com/photo-1627308595127-93a2cba1a93b?q=80&w=1200&auto=format&fit=crop'},
+      {id:'chips-s', title:'Banana Chips — Salted 200g', price:119, category:'Snacks',  img:'https://images.unsplash.com/photo-1627308595194-87e5d8e9d6c7?q=80&w=1200&auto=format&fit=crop'},
+      {id:'chips-j', title:'Banana Chips — Jaggery 200g',price:139, category:'Snacks',  img:'https://images.unsplash.com/photo-1627308595200-9a28c8a3c6b7?q=80&w=1200&auto=format&fit=crop'},
+      {id:'pickle',  title:'Mango Pickle 400g',          price:179, category:'Essentials',img:'https://images.unsplash.com/photo-1627308595158-8a4b3e6f66a4?q=80&w=1200&auto=format&fit=crop'},
+      {id:'appam',   title:'Puttu & Appam Flour 1kg',    price:149, category:'Essentials',img:'https://images.unsplash.com/photo-1627308595205-8c61c1f1a80f?q=80&w=1200&auto=format&fit=crop'},
+      {id:'lamp',    title:'Brass Oil Lamp (Nilavilakku)',price:1299, category:'Handicrafts', img:'https://images.unsplash.com/photo-1627308595211-bb5fa9c3e908?q=80&w=1200&auto=format&fit=crop'},
+      {id:'coir',    title:'Coir Doormat (Medium)',      price:549, category:'Handicrafts', img:'https://images.unsplash.com/photo-1627308595222-9e388bf66e9e?q=80&w=1200&auto=format&fit=crop'}
+    ];
+
+    const state = {
+      filter: 'all',
+      cart: JSON.parse(localStorage.getItem('athus_cart')||'[]')
+    };
+
+    function saveCart(){ localStorage.setItem('athus_cart', JSON.stringify(state.cart)); }
+
+    function renderProducts(){
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      const items = PRODUCTS.filter(p => state.filter==='all' || p.category===state.filter);
+      items.forEach(p => grid.appendChild(productCard(p)));
+    }
+
+    function productCard(p){
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.innerHTML = `
+        <img class="pic" src="${p.img}" alt="${p.title}">
+        <div class="card-body">
+          <div class="title">${p.title}</div>
+          <div class="subtle">${p.category}</div>
+        </div>
+        <div class="card-foot">
+          <div>
+            <span class="price">${INR(p.price)}</span>
+          </div>
+          <button class="btn btn-green" aria-label="Add ${p.title} to cart">Add</button>
+        </div>`;
+      el.querySelector('button').addEventListener('click', () => addToCart(p.id));
+      return el;
+    }
+
+    function setFilter(cat){
+      state.filter = cat;
+      document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.filter===cat || (cat==='all' && c.dataset.filter==='all')));
+      renderProducts();
+    }
+
+    // Cart logic
+    function addToCart(id, qty=1){
+      const item = state.cart.find(i => i.id===id);
+      if(item) item.qty += qty; else state.cart.push({id, qty});
+      saveCart();
+      updateCartUI();
+      toggleCart(true);
+    }
+    function updateQty(id, delta){
+      const item = state.cart.find(i => i.id===id);
+      if(!item) return;
+      item.qty += delta;
+      if(item.qty<=0) state.cart = state.cart.filter(i=>i.id!==id);
+      saveCart();
+      updateCartUI();
+    }
+    function cartLines(){
+      return state.cart.map(({id, qty})=>{
+        const p = PRODUCTS.find(x=>x.id===id);
+        return {...p, qty, total: p.price*qty}
+      });
+    }
+    function updateCartUI(){
+      const lines = cartLines();
+      const items = document.getElementById('cartItems');
+      items.innerHTML = lines.length? '' : '<p class="subtle">Your cart is empty.</p>';
+      lines.forEach(l=>{
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+          <img src="${l.img}" alt="${l.title}">
+          <div>
+            <div style="font-weight:700">${l.title}</div>
+            <div class="subtle">${INR(l.price)} each</div>
+          </div>
+          <div class="qty">
+            <button class="btn" aria-label="Decrease quantity">−</button>
+            <strong>${l.qty}</strong>
+            <button class="btn" aria-label="Increase quantity">+</button>
+          </div>`;
+        const [minus, plus] = row.querySelectorAll('button');
+        minus.addEventListener('click', ()=>updateQty(l.id,-1));
+        plus.addEventListener('click', ()=>updateQty(l.id,1));
+        items.appendChild(row);
+      });
+      const total = lines.reduce((s,l)=>s+l.total,0);
+      document.getElementById('subtotal').textContent = INR(total);
+      document.getElementById('cartCount').textContent = state.cart.reduce((s,i)=>s+i.qty,0);
+    }
+
+    function checkoutWhatsApp(){
+      const msg = cartLines().map(l=>`${l.title} x ${l.qty} = ${INR(l.total)}`).join('%0A');
+      const total = cartLines().reduce((s,l)=>s+l.total,0);
+      const url = `https://wa.me/910000000000?text=Order%20from%20Athu’s%20Kerala%20Store:%0A${msg}%0A%0ATotal:%20${INR(total)}%0AAddress:%20`;
+      window.open(url, '_blank');
+    }
+    function checkoutCOD(){
+      alert('Thanks! Cash on Delivery selected. Our team will contact you to confirm your address.');
+      state.cart = []; saveCart(); updateCartUI(); toggleCart(false);
+    }
+
+    // Offers adders
+    function addComboToCart(){ addToCart('pepper'); addToCart('turmeric'); addToCart('cinnamon'); }
+    function addChipsCombo(){ addToCart('chips-s'); addToCart('chips-j'); addToCart('chips-s'); }
+    function addOnamHamper(){ addToCart('chips-s'); addToCart('pickle'); addToCart('lamp'); }
+
+    // Drawer
+    function toggleCart(show){
+      const d = document.getElementById('cartDrawer');
+      d.classList.toggle('open', !!show);
+      d.setAttribute('aria-hidden', show? 'false':'true');
+    }
+
+    // Utils
+    function scrollToId(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
+
+    // Contact handler (demo only)
+    function submitContact(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      alert(`Thanks, ${data.name}! We will reply at ${data.email}.`);
+      e.target.reset();
+    }
+
+    // Init
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>setFilter(c.dataset.filter)));
+    renderProducts();
+    updateCartUI();
+    document.getElementById('cartBtn').addEventListener('click', ()=>toggleCart(true));
+  </script>
+</body>
+</html>
